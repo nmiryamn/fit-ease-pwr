@@ -9,9 +9,9 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Maintenance_Request")
+@Table(name = "maintenance_request")
 /**
- * JPA entity mapping the "Maintenance_Request" table.
+ * JPA entity mapping the "maintenance_request" table.
  * Represents a maintenance request.
  */
 public class MaintenanceRequest {
@@ -19,39 +19,39 @@ public class MaintenanceRequest {
     /** Auto-increment primary key. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "RequestID")
+    @Column(name = "requestid")
     private Integer requestId;
 
     /** ID of the reporting user. */
-    @Column(name = "UserID", nullable = false)
+    @Column(name = "userid", nullable = false)
     private Integer userId;
 
     /** Affected facility. */
-    @Column(name = "FacilityID", nullable = false)
+    @Column(name = "facilityid", nullable = false)
     private Integer facilityId;
 
     /** Assigned staff member (optional). */
-    @Column(name = "StaffID")
+    @Column(name = "staffid")
     private Integer staffId;
 
     /** Problem description. */
-    @Column(name = "Description", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
 
     /** Request status */
-    @Column(name = "Status", nullable = false, length = 20)
+    @Column(name = "status", nullable = false, length = 20)
     private String status;
 
     /** Report date-time. */
-    @Column(name = "ReportDate", nullable = false)
+    @Column(name = "reportdate", nullable = false)
     private LocalDateTime reportDate;
 
     /** Issue type (category). */
-    @Column(name = "IssueType", nullable = false, length = 100)
+    @Column(name = "issuetype", nullable = false, length = 100)
     private String issueType;
 
     /** Problem severity. */
-    @Column(name = "Severity", nullable = false, length = 100)
+    @Column(name = "severity", nullable = false, length = 100)
     private String severity;
 
     /** No-args constructor required by JPA. */
