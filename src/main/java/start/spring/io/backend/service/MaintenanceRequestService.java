@@ -1,8 +1,12 @@
-package start.spring.io.backend;
+package start.spring.io.backend.service;
 
-import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import start.spring.io.backend.model.MaintenanceRequest;
+import start.spring.io.backend.repository.MaintenanceRequestRepository;
 
 /**
  * Service layer for MaintenanceRequest business logic.

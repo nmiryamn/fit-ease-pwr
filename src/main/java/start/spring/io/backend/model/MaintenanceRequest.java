@@ -1,4 +1,4 @@
-package start.spring.io.backend;
+package start.spring.io.backend.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -56,6 +56,8 @@ public class MaintenanceRequest {
 
     /** No-args constructor required by JPA. */
     public MaintenanceRequest() {
+        // JPA requires a no-args constructor for entity instantiation.
+        // Initialization is handled through setter methods.
     }
 
     public Integer getRequestId() {

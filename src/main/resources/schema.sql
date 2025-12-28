@@ -1,3 +1,10 @@
+-- Borrar tablas si existen (orden inverso a las FK)
+DROP TABLE IF EXISTS penalty;
+DROP TABLE IF EXISTS maintenance_request;
+DROP TABLE IF EXISTS reservation;
+DROP TABLE IF EXISTS facility;
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE users (
   userid INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(150) NOT NULL,
