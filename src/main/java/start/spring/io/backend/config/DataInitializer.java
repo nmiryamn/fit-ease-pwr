@@ -19,8 +19,8 @@ public class DataInitializer implements CommandLineRunner {
     private final UserRepository userRepository;
     private final PenaltyRepository penaltyRepository; 
 
-    public DataInitializer(FacilityRepository facilityRepository, UserRepository userRepository, PenaltyRepository penaltyRepository) {
-        this.facilityRepository = facilityRepository; 
+    public DataInitializer(FacilityRepository facilityRepository, UserRepository userRepository) {
+        this.facilityRepository = facilityRepository;
         this.userRepository = userRepository;
         this.penaltyRepository = penaltyRepository;
     }
@@ -40,6 +40,8 @@ public class DataInitializer implements CommandLineRunner {
             userRepository.save(new User("Juan Perez", "juan@example.com", "123456", "admin"));
             maria = userRepository.save(new User("Maria Lopez", "maria@example.com", "password", "user"));
             userRepository.save(new User("Miryam Merchan", "miryam@example.com", "charlie", "manteinance"));
+            userRepository.save(new User("Maria Lopez", "maria@example.com", "password", "user"));
+            userRepository.save(new User("Miryam Merchan", "miryam@example.com", "charlie", "maintenance"));
             userRepository.save(new User("Carmen", "carmen@example.com", "uuuu", "user"));
         }
 
