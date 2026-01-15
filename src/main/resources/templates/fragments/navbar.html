@@ -60,7 +60,7 @@
         <div class="nav-grid-container">
             
             <div class="nav-column-left">
-                <a th:href="@{/dashboard}">
+                <a th:href="@{/facilities}">
                     <img th:src="@{/images/logo.png}" alt="Logo" style="height: 42px; width: auto;">
                 </a>
 
@@ -75,7 +75,7 @@
             <div class="nav-column-right">
                 <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="auth-text">Log in</a>
                 <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" style="display:inline;">
-                    <button type="submit" class="auth-text">Log out</button>
+                    <button type="submit" class="auth-text">↪ Log out</button>
                 </form>
             </div>
 
