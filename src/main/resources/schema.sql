@@ -1,12 +1,12 @@
 -- Borrar tablas si existen (orden inverso a las FK)
-DROP TABLE IF EXISTS penalty;
-DROP TABLE IF EXISTS maintenance_request;
-DROP TABLE IF EXISTS reservation;
-DROP TABLE IF EXISTS facility;
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS penalty CASCADE;
+DROP TABLE IF EXISTS maintenance_request CASCADE;
+DROP TABLE IF EXISTS reservation CASCADE;
+DROP TABLE IF EXISTS facility CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
-CREATE TABLE users (
-  userid INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE users ( -- in PostgreSQL, 'user' is a reserved keyword
+  userid SERIAL PRIMARY KEY,
   name VARCHAR(150) NOT NULL,
   email VARCHAR(254) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,
@@ -14,17 +14,17 @@ CREATE TABLE users (
 );
 
 CREATE TABLE facility (
-  facilityid INT AUTO_INCREMENT PRIMARY KEY,
+  facilityid SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   type VARCHAR(50) NOT NULL,
   status VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE reservation (
-  reservationid INT AUTO_INCREMENT PRIMARY KEY,
+  reservationid SERIAL PRIMARY KEY,
   userid INT NOT NULL,
   facilityid INT NOT NULL,
-  date DATETIME NOT NULL,
+  date TIMESTAMP NOT NULL,
   starttime TIME NOT NULL,
   endtime TIME NOT NULL,
   participants INT NOT NULL,
@@ -35,13 +35,13 @@ CREATE TABLE reservation (
 );
 
 CREATE TABLE maintenance_request (
-  requestid INT AUTO_INCREMENT PRIMARY KEY,
+  requestid SERIAL PRIMARY KEY,
   userid INT NOT NULL,
   facilityid INT NOT NULL,
   staffid INT NULL,
   description TEXT NOT NULL,
   status VARCHAR(20) NOT NULL,
-  reportdate DATETIME NOT NULL,
+  reportdate TIMESTAMP NOT NULL,
   issuetype VARCHAR(100) NOT NULL,
   severity VARCHAR(100) NOT NULL,
 
@@ -51,10 +51,10 @@ CREATE TABLE maintenance_request (
 );
 
 CREATE TABLE penalty (
-  penaltyid INT AUTO_INCREMENT PRIMARY KEY,
+  penaltyid SERIAL PRIMARY KEY,
   userid INT NOT NULL,
   description TEXT NOT NULL,
-  datehour DATETIME NOT NULL,
+  datehour TIMESTAMP NOT NULL,
 
   FOREIGN KEY (userid) REFERENCES users(userid) ON DELETE CASCADE
 );
