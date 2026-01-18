@@ -82,6 +82,7 @@ public class ReservationController {
             @RequestParam("endTime") String endTime,
             @RequestParam("participants") Integer participants,
             @RequestParam(value = "purpose", required = false) String purpose,
+            Model model,
             Authentication authentication) {
         Reservation reservation = new Reservation();
         reservation.setFacilityId(facilityId);
@@ -94,6 +95,16 @@ public class ReservationController {
         reservation.setDate(LocalDateTime.of(date, start));
         reservation.setStartTime(start);
         reservation.setEndTime(end);
+
+        if (service.hasOverlap(facilityId, date, start, end)) {
+            String facilityName = facilityService.getFacilityById(facilityId)
+                    .map(Facility::getName)
+                    .orElse("Selected Facility");
+            model.addAttribute("facilityId", facilityId);
+            model.addAttribute("facilityName", facilityName);
+            model.addAttribute("overlapError", "That time slot is already booked. Please choose another time.");
+            return "reservation-booking";
+        }
 
         Integer userId = 1;
         if (authentication != null && authentication.isAuthenticated()) {
