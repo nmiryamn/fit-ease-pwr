@@ -152,12 +152,23 @@
         <div class="grid-2">
             <div>
                 <label for="startTime">Start Time</label>
-                <input id="startTime" name="startTime" type="time" required />
+                <select id="startTime" name="startTime" required>
+                    <option value="" disabled selected>Select a start time</option>
+                </select>
             </div>
             <div>
                 <label for="endTime">End Time</label>
-                <input id="endTime" name="endTime" type="time" required />
+                <input id="endTime" name="endTime" type="time" readonly required />
             </div>
+        </div>
+
+        <div>
+            <label for="duration">Duration</label>
+            <select id="duration" name="duration" required>
+                <option value="60">60 minutes</option>
+                <option value="90">90 minutes</option>
+                <option value="120">120 minutes</option>
+            </select>
         </div>
 
         <div>
@@ -176,5 +187,60 @@
         </div>
     </form>
 </div>
+<script>
+    const startTimeSelect = document.getElementById("startTime");
+    const endTimeInput = document.getElementById("endTime");
+    const durationSelect = document.getElementById("duration");
+    const bookingDateInput = document.getElementById("bookingDate");
+
+    const toMinutes = (time) => {
+        const [hours, minutes] = time.split(":").map(Number);
+        return hours * 60 + minutes;
+    };
+
+    const toTimeString = (totalMinutes) => {
+        const hours = Math.floor(totalMinutes / 60)
+            .toString()
+            .padStart(2, "0");
+        const minutes = (totalMinutes % 60).toString().padStart(2, "0");
+        return `${hours}:${minutes}`;
+    };
+
+    const buildTimeSlots = () => {
+        startTimeSelect.innerHTML = '<option value="" disabled selected>Select a start time</option>';
+        for (let minutes = 360; minutes <= 1320; minutes += 30) {
+            const option = document.createElement("option");
+            option.value = toTimeString(minutes);
+            option.textContent = toTimeString(minutes);
+            startTimeSelect.appendChild(option);
+        }
+    };
+
+    const updateEndTime = () => {
+        const start = startTimeSelect.value;
+        const duration = Number(durationSelect.value);
+        if (!start) {
+            endTimeInput.value = "";
+            return;
+        }
+        const endMinutes = toMinutes(start) + duration;
+        endTimeInput.value = toTimeString(endMinutes);
+    };
+
+    const initMinDate = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, "0");
+        const day = String(today.getDate()).padStart(2, "0");
+        bookingDateInput.min = `${year}-${month}-${day}`;
+    };
+
+    buildTimeSlots();
+    updateEndTime();
+    initMinDate();
+
+    startTimeSelect.addEventListener("change", updateEndTime);
+    durationSelect.addEventListener("change", updateEndTime);
+</script>
 </body>
 </html>
