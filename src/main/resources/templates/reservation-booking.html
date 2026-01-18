@@ -54,6 +54,15 @@
             font-size: 13px;
         }
 
+        .alert {
+            background: #fff4f4;
+            border: 1px solid #f7c6c6;
+            color: #b42318;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 13px;
+        }
+
         .close {
             text-decoration: none;
             color: var(--muted);
@@ -143,6 +152,8 @@
 
     <form th:action="@{/reservations/book}" method="post">
         <input type="hidden" name="facilityId" th:value="${facilityId}" />
+
+        <div class="alert" th:if="${overlapError}" th:text="${overlapError}"></div>
 
         <div>
             <label for="bookingDate">Date</label>
