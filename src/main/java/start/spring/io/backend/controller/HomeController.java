@@ -1,4 +1,4 @@
-package start.spring.io.backend;
+package start.spring.io.backend.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
