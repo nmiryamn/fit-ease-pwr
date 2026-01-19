@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>My Bookings</title>
+    <th:block th:replace="~{fragments/navbar :: nav-header}"></th:block>
     <style>
         :root {
             --bg: #f5f7fb;
@@ -27,81 +28,8 @@
             color: var(--text);
         }
 
-        header {
-            background: #fff;
-            border-bottom: 1px solid var(--border);
-            padding: 20px 36px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .brand-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            background: var(--primary);
-            display: grid;
-            place-items: center;
-            color: white;
-            font-size: 20px;
-            box-shadow: 0 8px 18px rgba(79, 70, 229, 0.24);
-        }
-
-        .brand h1 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .brand p {
-            margin: 4px 0 0;
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        .logout {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .tabs {
-            background: #fff;
-            border-bottom: 1px solid var(--border);
-            padding: 0 36px;
-        }
-
-        .tabs ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 24px;
-        }
-
-        .tabs a {
-            display: inline-flex;
-            gap: 8px;
-            padding: 14px 0;
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 600;
-            border-bottom: 2px solid transparent;
-        }
-
-        .tabs a.active {
-            color: var(--primary);
-            border-color: var(--primary);
-        }
-
         main {
-            padding: 28px 36px 60px;
+            padding: 28px 32px 60px;
         }
 
         .page-title h2 {
@@ -269,23 +197,7 @@
     </style>
 </head>
 <body>
-<header>
-    <div class="brand">
-        <div class="brand-icon">📅</div>
-        <div>
-            <h1>Sports Facilities</h1>
-            <p th:text="'Welcome, ' + ${userName}"></p>
-        </div>
-    </div>
-    <a class="logout" href="/logout">↗ Logout</a>
-</header>
-
-<nav class="tabs">
-    <ul>
-        <li><a href="/facilities">📅 Available Spaces</a></li>
-        <li><a class="active" href="/reservations">📋 My Bookings</a></li>
-    </ul>
-</nav>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <main>
     <div class="page-title">
